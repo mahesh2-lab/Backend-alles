@@ -95,27 +95,28 @@ async def process_evaluation_job(
 
     position = (job_description or "").split('\n', 1)[0]
 
-    # task = send_email_task.delay(
-    #     to_email=new.email,
-    #     candidate_name=new.name,
-    #     position=position,
-    #     is_eligible=eval_data.get("is_eligible"), # type: ignore
-    #     candidate_id=new.id,
-    #     evaluation_id=new_eval.id,
-    #     requisition_id=requisition_id
-        
-    # )
-    send_email_task(
-        to_email=new.email, # type: ignore
-        candidate_name=new.name, # type: ignore
+    task = send_email_task.delay(
+        to_email=new.email,
+        candidate_name=new.name,
         position=position,
         is_eligible=eval_data.get("is_eligible"), # type: ignore
-        candidate_id=new.id,# type: ignore
-        evaluation_id=new_eval.id,# type: ignore
-        requisition_id=requisition_id# type: ignore
+        candidate_id=new.id,
+        evaluation_id=new_eval.id,
+        requisition_id=requisition_id
+        
     )
+    
+    # send_email_task(
+    #     to_email=new.email, # type: ignore
+    #     candidate_name=new.name, # type: ignore
+    #     position=position,
+    #     is_eligible=eval_data.get("is_eligible"), # type: ignore
+    #     candidate_id=new.id,# type: ignore
+    #     evaluation_id=new_eval.id,# type: ignore
+    #     requisition_id=requisition_id# type: ignore
+    # )
 
-    return result_candidate
+    return result_candidate, task.id
 
 
 async def event_stream_generator(

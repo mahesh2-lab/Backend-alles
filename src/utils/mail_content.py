@@ -8,7 +8,7 @@ def generate_mail_content(candidate_name: str, position: str, is_eligible: bool,
     sender_name = "Jane Doe"
     sender_title = "HR Manager"
     company_name = "Acme Corp"
-    link = f"http://agent.hostmyidea.me/{id}"
+    link = f"http://agent.hostmyidea.me/?id={id}"
 
     """Generate HTML content for the email."""
     if is_eligible:

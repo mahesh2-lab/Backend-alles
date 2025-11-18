@@ -209,6 +209,8 @@ def list_evaluations(
                 "summary": evaluation.summary,
                 "strengths": evaluation.strengths,
                 "weaknesses": evaluation.weaknesses,
+                "report": evaluation.report,
+                "interview_status": evaluation.interview_status,
                 "evaluated_at": evaluation.evaluated_at.isoformat() if evaluation.evaluated_at else None, # type: ignore
             }
             

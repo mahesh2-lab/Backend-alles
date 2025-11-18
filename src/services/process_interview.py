@@ -14,7 +14,7 @@ def analyze_transcript_content(transcript_data: Dict) -> Dict[str, Any]:
 
     # Prepare the request structure for the model
     model_request = {
-        "model": "gemini-2.5-flash",
+        "model": "gemini-2.0-flash",
         "config": types.GenerateContentConfig(
             system_instruction="""
                 You are a highly skilled AI recruitment analyst trained in behavioral psychology, technical evaluation, and fair-hiring practices.
@@ -102,7 +102,7 @@ Do not penalize for language fluency or grammar if the candidate demonstrates st
     model_response = genai_client.models.generate_content(**model_request)
 
     try:
-        # Remove any code block markers (e.g., ```json ... ```) before parsing
+
         cleaned_response = re.sub(
             r"```(?:json)?(.*?)```", r"\1", model_response.text.strip(), flags=re.DOTALL) # type: ignore
         # model_response may include markdown fences; remove them and parse JSON
